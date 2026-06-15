@@ -1,17 +1,1944 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+const leftCards = [
+  { label: 'Beauty',    handle: '@lenahoffmann',  sub: '128K · Beauty',   likes: '4.2K', progress: 42,
+    bg: `radial-gradient(ellipse 60% 42% at 50% 68%,rgba(245,195,180,.85)0%,rgba(230,155,145,.45)50%,transparent 72%),linear-gradient(160deg,#FFE0EB 0%,#FFB8CF 35%,#FF97B4 65%,#EE7FA0 100%)` },
+  { label: 'Fitness',   handle: '@max.moves',     sub: '56K · Fitness',   likes: '2.8K', progress: 67,
+    bg: `radial-gradient(ellipse 45% 52% at 50% 62%,rgba(60,110,60,.42)0%,transparent 66%),linear-gradient(172deg,#AAD8EA 0%,#7AB4E8 25%,#A0D977 55%,#5A9940 80%,#2B7D33 100%)` },
+  { label: 'Food',      handle: '@tastewith_j',   sub: '89K · Cooking',   likes: '7.1K', progress: 55,
+    bg: `radial-gradient(ellipse 50% 42% at 50% 52%,rgba(255,195,110,.68)0%,transparent 62%),linear-gradient(162deg,#FFF3E0 0%,#FFCC80 30%,#FFA726 60%,#E65100 100%)` },
+  { label: 'Tech',      handle: '@techwithdave',  sub: '204K · Tech',     likes: '9.4K', progress: 30,
+    bg: `radial-gradient(ellipse 50% 60% at 50% 56%,rgba(80,115,195,.38)0%,transparent 66%),linear-gradient(162deg,#1A1F3A 0%,#1E3055 30%,#2840A0 60%,#1A2B7A 100%)` },
+  { label: 'Creator',   handle: '@markus_v',      sub: '44K · Lifestyle',  likes: '1.9K', progress: 78,
+    bg: `radial-gradient(ellipse 50% 47% at 50% 66%,rgba(195,155,115,.48)0%,transparent 62%),linear-gradient(162deg,#2C2C2C 0%,#3A2820 30%,#4D3428 60%,#3B2A20 100%)` },
+  { label: 'Business',  handle: '@sophiab.works', sub: '31K · Business',  likes: '1.2K', progress: 88,
+    bg: `radial-gradient(ellipse 55% 52% at 50% 62%,rgba(215,228,248,.78)0%,rgba(175,198,238,.38)52%,transparent 72%),linear-gradient(162deg,#EEF2FA 0%,#D6E4F8 35%,#C0D4F0 65%,#A8C0E0 100%)` },
+  { label: 'Family',    handle: '@family.corner', sub: '77K · Family',    likes: '5.6K', progress: 22,
+    bg: `radial-gradient(ellipse 50% 47% at 50% 66%,rgba(255,195,135,.68)0%,transparent 62%),linear-gradient(162deg,#FFF8E7 0%,#FFE0A0 35%,#FFB347 65%,#FF8F00 100%)` },
+  { label: 'Lifestyle', handle: '@earth.creator', sub: '52K · Lifestyle', likes: '3.3K', progress: 60,
+    bg: `radial-gradient(ellipse 45% 42% at 50% 66%,rgba(175,135,105,.48)0%,transparent 62%),linear-gradient(162deg,#6D4C41 0%,#795548 30%,#A1887F 60%,#BCAAA4 100%)` },
+];
+
+const rightCards = [
+  { label: 'Skincare',  handle: '@pure.skin',       sub: '165K · Skincare', likes: '8.8K', progress: 35,
+    bg: `radial-gradient(ellipse 55% 47% at 50% 66%,rgba(255,228,238,.88)0%,rgba(255,195,218,.48)52%,transparent 72%),linear-gradient(162deg,#FFFFFF 0%,#FFF0F5 30%,#FFD6E7 60%,#FFADC4 100%)` },
+  { label: 'Fashion',   handle: '@minimal.style',   sub: '93K · Fashion',  likes: '6.1K', progress: 50,
+    bg: `radial-gradient(ellipse 50% 47% at 50% 66%,rgba(218,208,195,.58)0%,transparent 62%),linear-gradient(162deg,#F5F0EB 0%,#EAE2D8 35%,#D9CCBA 65%,#C8B8A0 100%)` },
+  { label: 'Wellness',  handle: '@yoga.daily',      sub: '71K · Wellness', likes: '3.7K', progress: 72,
+    bg: `radial-gradient(ellipse 50% 47% at 50% 62%,rgba(138,178,118,.48)0%,transparent 66%),linear-gradient(166deg,#F1F8E9 0%,#DCEDC8 30%,#AED581 60%,#7CB342 100%)` },
+  { label: 'Product',   handle: '@reviewed.by.k',   sub: '118K · Product', likes: '5.5K', progress: 15,
+    bg: `radial-gradient(ellipse 50% 57% at 50% 52%,rgba(83,50,128,.58)0%,transparent 66%),linear-gradient(162deg,#0D1B2A 0%,#16213E 30%,#0F3460 60%,#533483 100%)` },
+  { label: 'Cooking',   handle: '@cookinwithcara',  sub: '83K · Recipes',  likes: '4.9K', progress: 83,
+    bg: `radial-gradient(ellipse 55% 47% at 50% 57%,rgba(255,155,95,.48)0%,transparent 62%),linear-gradient(166deg,#FBE9E7 0%,#FFAB91 35%,#FF7043 65%,#D84315 100%)` },
+  { label: 'Travel',    handle: '@wandershots',     sub: '241K · Travel',  likes: '12K',  progress: 45,
+    bg: `radial-gradient(ellipse 50% 52% at 50% 47%,rgba(95,178,255,.38)0%,transparent 66%),linear-gradient(172deg,#E3F2FD 0%,#90CAF9 30%,#1E88E5 60%,#0D47A1 100%)` },
+  { label: 'Home',      handle: '@homebyanna',      sub: '67K · Interior', likes: '2.4K', progress: 62,
+    bg: `radial-gradient(ellipse 55% 42% at 50% 66%,rgba(208,178,138,.52)0%,transparent 66%),linear-gradient(162deg,#EFEBE9 0%,#D7CCC8 30%,#BCAAA4 60%,#8D6E63 100%)` },
+  { label: 'Finance',   handle: '@finwith_j',       sub: '89K · Finance',  likes: '3.1K', progress: 27,
+    bg: `radial-gradient(ellipse 45% 52% at 50% 57%,rgba(44,78,118,.48)0%,transparent 66%),linear-gradient(162deg,#0A0E1A 0%,#101828 30%,#1C2F4A 60%,#243B55 100%)` },
+];
 ---
+<Layout title="swype.me — Run UGC like a product team.">
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<style>
+  /* ── Navigation ── */
+  #nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    height: 72px;
+    transition: background 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
+  }
+  #nav.scrolled {
+    background: rgba(250,250,248,0.9);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    height: 100%; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 15px; font-weight: 800; letter-spacing: -0.05em;
+    color: var(--text-primary); text-decoration: none; flex-shrink: 0;
+  }
+  .nav-links { display: flex; align-items: center; gap: 2px; }
+  .nav-link {
+    font-size: 14px; font-weight: 500; color: var(--text-secondary);
+    padding: 8px 14px; border-radius: 999px; text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  .nav-link:hover { color: var(--text-primary); background: var(--surface-soft); }
+  .nav-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .nav-creator-link {
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.2s ease;
+  }
+  .nav-creator-link:hover { color: var(--text-primary); }
+  .nav-demo-btn { height: 40px; padding: 0 18px; font-size: 13px; }
+  #menu-toggle {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 6px;
+  }
+  .menu-bar {
+    width: 20px; height: 1.5px; background: var(--text-primary);
+    display: block; transition: all 0.25s ease;
+  }
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .nav-creator-link { display: none; }
+    #menu-toggle { display: flex; }
+  }
+
+  /* ── Mobile Menu ── */
+  #mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: var(--bg); padding: 24px; flex-direction: column; gap: 4px;
+    overflow-y: auto;
+  }
+  #mobile-menu.open { display: flex; }
+  .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+  .mobile-nav-link {
+    font-size: 28px; font-weight: 700; letter-spacing: -0.04em;
+    color: var(--text-primary); text-decoration: none; padding: 12px 0;
+    border-bottom: 1px solid var(--border); display: block;
+    transition: color 0.2s ease;
+  }
+  .mobile-nav-link:hover { color: var(--text-secondary); }
+  .mobile-cta-group { margin-top: auto; padding-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+
+  /* ── Aurora ── */
+  .aurora-orb {
+    position: absolute; border-radius: 50%; pointer-events: none;
+    filter: blur(80px); animation: aurora-drift 24s ease-in-out infinite;
+  }
+
+  /* ── Hero ── */
+  #hero {
+    padding-top: 180px; padding-bottom: 120px;
+    position: relative; overflow: hidden; text-align: center;
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  }
+  #hero > .container { width: 100%; }
+
+  /* ── Testimonials section ── */
+  #testimonials {
+    padding: 72px 0 80px; background: var(--bg);
+    overflow: hidden; position: relative;
+  }
+  @media (max-width: 768px) {
+    #testimonials { padding: 48px 0 56px; }
+    .testi-strip {
+      margin-top: 0 !important;
+      -webkit-mask-image: none !important;
+      mask-image: none !important;
+    }
+    .testi-row {
+      animation: none !important;
+      overflow-x: auto; overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      width: 100%; padding: 4px 16px;
+      scrollbar-width: none;
+    }
+    .testi-row::-webkit-scrollbar { display: none; }
+    .testi-card { scroll-snap-align: start; flex-shrink: 0; width: 280px; }
+    .testi-row + .testi-row { margin-top: 12px; }
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow-line { width: 24px; height: 1px; background: var(--border-strong); }
+
+  /* ── Workflow Pipeline ── */
+  .pipeline-wrapper {
+    margin-top: 80px; overflow-x: auto;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+  .pipeline-wrapper::-webkit-scrollbar { display: none; }
+  .pipeline-track {
+    display: flex; align-items: stretch; gap: 0;
+    min-width: max-content; padding: 4px 2px 4px;
+  }
+  .pipeline-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 20px; width: 195px; flex-shrink: 0;
+    box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 0;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .pipeline-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.09); }
+  .pipeline-card--active {
+    border-color: rgba(77,141,255,0.22);
+    box-shadow: 0 0 0 1px rgba(77,141,255,0.12), 0 8px 32px rgba(77,141,255,0.09);
+    width: 210px;
+  }
+  .pipeline-card--dim { opacity: 0.55; }
+  .pipeline-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
+  }
+  .pipeline-title {
+    font-size: 13px; font-weight: 700; color: var(--text-primary);
+    letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.3;
+  }
+  .pipeline-meta { font-size: 11px; color: var(--text-muted); line-height: 1.6; }
+  .pipeline-footer {
+    margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .pipeline-footer-text { font-size: 10px; font-weight: 600; color: var(--text-muted); }
+  .pipeline-connector {
+    display: flex; align-items: center; width: 28px; flex-shrink: 0;
+    margin-block: 56px; position: relative;
+  }
+  .connector-line {
+    width: 100%; height: 1px; background: var(--border-strong);
+    position: relative; overflow: visible;
+  }
+  .connector-dot {
+    position: absolute; top: -3px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--accent-blue);
+    animation: travel 3.2s linear infinite;
+  }
+  .avatar-stack { display: flex; margin-bottom: 10px; }
+  .avatar-item {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid var(--surface); margin-left: -7px;
+    font-size: 10px; font-weight: 700; color: white;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .avatar-item:first-child { margin-left: 0; }
+  .video-thumb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 10px; }
+  .video-thumb {
+    aspect-ratio: 9/16; border-radius: 8px; border: 1px solid var(--border);
+    overflow: hidden; max-height: 80px;
+  }
+  .platform-mini {
+    font-size: 10px; background: var(--surface-soft); color: var(--text-muted);
+    padding: 3px 7px; border-radius: 5px; font-weight: 500;
+  }
+
+  /* ── Sections ── */
+  .section { padding-block: 140px; }
+  @media (max-width: 768px) { .section { padding-block: 88px; } }
+  .section-label { margin-bottom: 20px; }
+  .section-sub {
+    font-size: clamp(16px, 1.5vw, 20px); line-height: 1.6;
+    color: var(--text-secondary); max-width: 600px; margin-top: 24px;
+  }
+
+  /* ── Problem ── */
+  .chaos-grid { position: relative; }
+  .chaos-tool {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 7px 13px; font-size: 12px; font-weight: 500;
+    color: var(--text-secondary); box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    white-space: nowrap;
+  }
+  .chaos-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Workflow Steps ── */
+  .workflow-step {
+    display: grid; grid-template-columns: 56px 1fr auto;
+    gap: 24px; align-items: start;
+    padding: 32px 0; border-top: 1px solid var(--border);
+  }
+  .workflow-step:last-child { border-bottom: 1px solid var(--border); }
+  .step-num {
+    font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+    color: var(--text-muted); padding-top: 3px;
+  }
+  .step-body { display: flex; flex-direction: column; gap: 6px; }
+  .step-title { font-size: 16px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+  .step-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── Creator Card ── */
+  .creator-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 28px; padding: 28px; box-shadow: var(--shadow-soft);
+  }
+  .creator-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #4D8DFF, #A56BFF);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: white; margin-bottom: 14px;
+  }
+  .creator-name { font-size: 16px; font-weight: 700; letter-spacing: -0.03em; color: var(--text-primary); }
+  .creator-handle { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+  .creator-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .creator-tag {
+    font-size: 11px; font-weight: 600; background: var(--surface-soft);
+    color: var(--text-secondary); padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .match-ring-wrap {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+    padding: 14px; background: var(--surface-soft); border-radius: 14px;
+  }
+  .match-score-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+  .match-score-value { font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--text-primary); line-height: 1; }
+  .creator-portfolio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; border-radius: 12px; overflow: hidden; }
+  .portfolio-thumb {
+    aspect-ratio: 9/16; background: var(--surface-soft); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; max-height: 100px;
+  }
+  .stats-bar { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-bottom: 56px; }
+  .stat-item { display: flex; flex-direction: column; gap: 4px; padding-right: 32px; margin-right: 32px; border-right: 1px solid var(--border); }
+  .stat-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .stat-value { font-size: 28px; font-weight: 800; letter-spacing: -0.04em; color: var(--text-primary); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .live-indicator { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: #16A34A; }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #22C55E; animation: blink 1.5s ease-in-out infinite; }
+
+  /* ── Video in cvcard ── */
+  .cvcard-video {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+
+  /* ── Instagram creator card ── */
+  .insta-card {
+    background: #fff; border: 1px solid #DBDBDB;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.08);
+  }
+  .insta-topbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px; border-bottom: 1px solid #EFEFEF;
+  }
+  .insta-avatar-ring {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: linear-gradient(135deg,#feda77,#f58529,#dd2a7b,#8134af,#515bd4);
+    padding: 2.5px; flex-shrink: 0;
+  }
+  .insta-avatar-inner {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: linear-gradient(135deg,#4D8DFF,#A56BFF);
+    display: flex; align-items: center; justify-content: center;
+    border: 2.5px solid white; font-size: 22px; font-weight: 800; color: white;
+  }
+  .insta-stats-row { display: flex; flex: 1; }
+  .insta-stat {
+    display: flex; flex-direction: column; align-items: center; flex: 1; gap: 2px;
+  }
+  .insta-stat strong { font-size: 14px; font-weight: 700; letter-spacing: -0.03em; color: #262626; }
+  .insta-stat span { font-size: 11px; color: #8e8e8e; }
+  .insta-actions-row {
+    display: grid; grid-template-columns: 1fr 1fr 34px; gap: 6px; padding: 0 14px 12px;
+  }
+  .btn-insta-follow {
+    background: #0095F6; color: white; border: none;
+    border-radius: 8px; font-size: 13px; font-weight: 600; height: 32px; cursor: pointer;
+  }
+  .btn-insta-msg {
+    background: #EFEFEF; color: #262626; border: none;
+    border-radius: 8px; font-size: 13px; font-weight: 600; height: 32px; cursor: pointer;
+  }
+  .btn-insta-more {
+    background: #EFEFEF; border: none; border-radius: 8px; height: 32px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .insta-media-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; }
+  .insta-media-cell {
+    aspect-ratio: 1; overflow: hidden; position: relative; background: var(--surface-soft);
+  }
+  .insta-media-cell video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .insta-media-cell .imcell-bg { position: absolute; inset: 0; }
+  .imcell-views {
+    position: absolute; bottom: 4px; left: 5px;
+    font-size: 9px; font-weight: 700; color: white; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    display: flex; align-items: center; gap: 2px;
+  }
+  .insta-cell-selected::after {
+    content: ''; position: absolute; inset: 0;
+    border: 2px solid #0095F6; pointer-events: none; z-index: 1;
+  }
+  .insta-match-section {
+    padding: 12px 14px; border-top: 1px solid #EFEFEF;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  /* ── UGC Creator Card ── */
+  .ugc-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 22px; overflow: hidden; box-shadow: var(--shadow-card);
+    max-width: 340px;
+  }
+  .ugc-vwrap { position: relative; height: 310px; overflow: hidden; }
+  .ugc-vwrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ugc-voverlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.12) 0%, transparent 30%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,0.88) 100%);
+  }
+  .ugc-vfooter {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 12px 14px 16px;
+    display: flex; align-items: flex-end; gap: 10px;
+  }
+  .ugc-avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, #feda77, #f58529, #dd2a7b);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; color: white;
+    border: 2.5px solid white; flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .ugc-name { font-size: 15px; font-weight: 800; color: white; letter-spacing: -0.02em; line-height: 1.2; }
+  .ugc-sub { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  .ugc-platform-badges { display: flex; gap: 4px; margin-top: 5px; }
+  .ugc-pbadge {
+    width: 20px; height: 20px; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ugc-stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 12px 10px; border-bottom: 1px solid var(--border);
+  }
+  .ugc-stat { display: flex; flex-direction: column; align-items: center; }
+  .ugc-stat + .ugc-stat { border-left: 1px solid var(--border); }
+  .ugc-stat-v { font-size: 14px; font-weight: 800; letter-spacing: -0.03em; color: var(--text-primary); }
+  .ugc-stat-l { font-size: 9px; color: var(--text-muted); margin-top: 1px; font-weight: 500; text-align: center; }
+  .ugc-tags { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .ugc-tag {
+    font-size: 10px; font-weight: 600; color: var(--text-secondary);
+    background: var(--surface-soft); border-radius: 999px; padding: 3px 9px;
+    border: 1px solid var(--border);
+  }
+
+  /* ── Testimonials ── */
+  .testi-strip {
+    margin-top: 0; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+  .testi-row { display: flex; width: max-content; gap: 14px; padding: 4px 0; }
+  .testi-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 18px; padding: 18px 20px;
+    width: 300px; flex-shrink: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    box-shadow: var(--shadow-card);
+  }
+  .testi-stars { font-size: 11px; color: #F59E0B; letter-spacing: 2px; }
+  .testi-quote {
+    font-size: 12.5px; line-height: 1.65; color: var(--text-primary);
+    font-style: italic; flex: 1;
+  }
+  .testi-author {
+    display: flex; align-items: center; gap: 10px;
+    padding-top: 10px; border-top: 1px solid var(--border);
+  }
+  .testi-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; color: white; flex-shrink: 0;
+  }
+  .testi-name { font-size: 11px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; }
+  .testi-role { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+
+  /* ── AI Script ── */
+  .script-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-card);
+  }
+  .script-panel-header {
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+    background: var(--surface-soft);
+  }
+  .script-panel-body { padding: 20px; }
+  .script-option {
+    padding: 12px 14px; border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 8px; cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .script-option.selected {
+    border-color: rgba(77,141,255,0.35);
+    background: rgba(77,141,255,0.04);
+  }
+  .script-option-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 4px; }
+  .script-option-text { font-size: 12px; color: var(--text-primary); line-height: 1.5; }
+
+  /* ── Approval ── */
+  .approval-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-soft);
+  }
+  .video-preview {
+    background: linear-gradient(160deg, rgba(77,141,255,0.1) 0%, rgba(165,107,255,0.08) 100%);
+    aspect-ratio: 9/16; max-height: 340px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; border: 1px solid var(--border);
+  }
+  .play-btn {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .approval-row {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
+  .approval-row:last-child { border-bottom: none; }
+  .approval-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--surface-soft); border: 1px solid var(--border);
+    flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-muted);
+  }
+  .approval-btn {
+    flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--border);
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    background: transparent; color: var(--text-primary);
+  }
+  .approval-btn.approve { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.25); color: #16A34A; }
+  .approval-btn.revise { background: var(--surface-soft); }
+
+  /* ── Publishing ── */
+  .publish-platform {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
+    transition: border-color 0.2s ease;
+  }
+  .publish-platform:hover { border-color: var(--border-strong); }
+  .platform-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .platform-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .platform-schedule { font-size: 12px; color: var(--text-muted); }
+  .calendar-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 20px; }
+  .cal-day { font-size: 10px; font-weight: 600; color: var(--text-muted); text-align: center; padding: 6px 0; }
+  .cal-event {
+    border-radius: 6px; padding: 4px 6px; font-size: 10px; font-weight: 600;
+    color: white; line-height: 1.3; margin-bottom: 3px;
+    display: flex; align-items: center; gap: 5px; overflow: hidden;
+  }
+  .cal-event-thumb {
+    width: 14px; height: 22px; border-radius: 3px; object-fit: cover; flex-shrink: 0;
+  }
+
+  /* ── Metrics ── */
+  .metric-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center; padding: 52px 0; border-top: 1px solid var(--border);
+  }
+  .metric-row:last-child { border-bottom: 1px solid var(--border); }
+  .metric-number {
+    font-size: clamp(64px, 8vw, 112px); font-weight: 800;
+    letter-spacing: -0.06em; line-height: 0.9; color: var(--text-primary);
+  }
+  .metric-label { font-size: 16px; color: var(--text-secondary); margin-top: 12px; }
+  .metric-note { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+  @media (max-width: 640px) {
+    .metric-row { grid-template-columns: 1fr; gap: 16px; }
+  }
+
+  /* ── Logo Strip ── */
+  .logo-strip { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; justify-content: center; }
+  .logo-placeholder {
+    height: 28px; width: 80px; background: var(--surface-soft);
+    border-radius: 4px; opacity: 0.5;
+  }
+
+  /* ── Campaign Sim ── */
+  .campaign-timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 20px; align-items: start; position: relative; padding-bottom: 28px;
+  }
+  .timeline-item::after {
+    content: ''; position: absolute; left: 38px; top: 14px; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-item:last-child::after { display: none; }
+  .timeline-day {
+    font-size: 11px; font-weight: 700; color: var(--text-muted);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding-top: 2px; text-align: right; padding-right: 16px;
+  }
+  .timeline-dot-wrap { position: absolute; left: 32px; top: 0; width: 12px; height: 12px; }
+  .timeline-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--border-strong);
+    position: relative; z-index: 1;
+  }
+  .timeline-dot.active { border-color: var(--accent-blue); background: rgba(77,141,255,0.1); }
+  .timeline-dot.done { border-color: #22C55E; background: rgba(34,197,94,0.1); }
+  .timeline-content { padding-left: 28px; }
+  .timeline-event { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; }
+  .timeline-desc { font-size: 13px; color: var(--text-muted); }
+
+  /* ── Security ── */
+  .role-row {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 40px; align-items: start;
+    padding: 40px 0; border-top: 1px solid var(--border);
+  }
+  .role-row:last-child { border-bottom: 1px solid var(--border); }
+  .role-name { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); }
+  .role-access { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+  .permission-list { display: flex; flex-direction: column; gap: 8px; }
+  .permission-item {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .perm-icon { color: #16A34A; flex-shrink: 0; font-size: 13px; }
+  @media (max-width: 768px) {
+    .role-row { grid-template-columns: 1fr; gap: 16px; }
+    .workflow-step { grid-template-columns: 40px 1fr; }
+    .workflow-step > :last-child { display: none; }
+  }
+
+  /* ── Final CTA ── */
+  #final-cta {
+    padding-block: 180px; text-align: center;
+    position: relative; overflow: hidden;
+    background: var(--text-primary);
+  }
+  .cta-title {
+    font-size: clamp(44px, 6vw, 88px); font-weight: 700;
+    letter-spacing: -0.05em; line-height: 0.97;
+    color: #FFFFFF; margin-bottom: 28px;
+  }
+  .cta-sub { font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto 48px; }
+  .cta-aurora {
+    position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px);
+    animation: aurora-drift 24s ease-in-out infinite;
+  }
+  .btn-cta-white {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 52px; padding: 0 28px; border-radius: 999px;
+    background: white; color: #09090B; font-size: 15px; font-weight: 600;
+    letter-spacing: -0.01em; text-decoration: none;
+    transition: transform 220ms cubic-bezier(0.22,1,0.36,1), opacity 200ms ease;
+  }
+  .btn-cta-white:hover { transform: scale(1.015); opacity: 0.92; }
+  .btn-cta-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 52px; padding: 0 28px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7);
+    font-size: 15px; font-weight: 500; letter-spacing: -0.01em; text-decoration: none;
+    transition: background 200ms ease, border-color 200ms ease;
+  }
+  .btn-cta-ghost:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.35); color: white; }
+
+  /* ── Footer ── */
+  footer { padding-block: 56px; border-top: 1px solid var(--border); }
+  .footer-logo { font-size: 14px; font-weight: 800; letter-spacing: -0.04em; color: var(--text-primary); }
+  .footer-link { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; }
+  .footer-link:hover { color: var(--text-primary); }
+
+  #final-cta { scroll-margin-top: 72px; }
+</style>
+
+<style>
+  /* ── Creator Video Wall ── */
+  .vwall {
+    position: absolute; top: 0; bottom: 0; width: 290px;
+    overflow: hidden; z-index: 1; pointer-events: none;
+    mask-image: linear-gradient(to bottom,
+      transparent 0%, rgba(0,0,0,.5) 8%, black 18%, black 62%, rgba(0,0,0,.25) 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0%, rgba(0,0,0,.5) 8%, black 18%, black 62%, rgba(0,0,0,.25) 82%, transparent 100%);
+  }
+  .vwall-l { left: 0; }
+  .vwall-r { right: 0; }
+
+  .vwall-track {
+    display: flex; flex-direction: column; gap: 12px; padding: 6px 0;
+  }
+  .vwall-l .vwall-track { animation: vscroll-up 54s linear infinite; align-items: flex-start; }
+  .vwall-r .vwall-track { animation: vscroll-down 64s linear infinite; align-items: flex-end; }
+
+  @keyframes vscroll-up {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  @keyframes vscroll-down {
+    0%   { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+
+  .cvcard {
+    width: 186px; aspect-ratio: 9 / 16; border-radius: 22px;
+    overflow: hidden; position: relative; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,.55);
+    box-shadow: 0 6px 24px rgba(0,0,0,.1), 0 1px 4px rgba(0,0,0,.06);
+  }
+  .cvcard-bg { position: absolute; inset: 0; }
+
+  .cvcard-top {
+    position: absolute; top: 10px; left: 10px; right: 10px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cvcard-label {
+    background: rgba(0,0,0,.32); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    color: white; font-size: 8px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 999px;
+  }
+  .cvcard-likes {
+    background: rgba(0,0,0,.28); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    color: white; font-size: 8px; font-weight: 600; padding: 3px 7px; border-radius: 999px;
+  }
+
+  .cvcard-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px 10px 28px;
+    background: linear-gradient(to top, rgba(0,0,0,.62) 0%, transparent 100%);
+    color: white;
+  }
+  .cvcard-name  { font-size: 10px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+  .cvcard-sub   { font-size: 8.5px; opacity: .65; margin-top: 2px; }
+
+  .cvcard-bar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2.5px;
+    background: rgba(255,255,255,.22);
+  }
+  .cvcard-bar-fill { height: 100%; background: white; border-radius: 2px; }
+
+  /* Edge fades – thin solid at very edge, quickly opens to let creators show */
+  .hero-fade-l, .hero-fade-r {
+    position: absolute; top: 0; bottom: 0; width: 360px; z-index: 2; pointer-events: none;
+  }
+  .hero-fade-l { left: 0;
+    background: linear-gradient(to right,
+      var(--bg) 0%,
+      rgba(250,250,248,.88) 7%,
+      rgba(250,250,248,.52) 18%,
+      rgba(250,250,248,.22) 32%,
+      rgba(250,250,248,.06) 52%,
+      transparent 72%); }
+  .hero-fade-r { right: 0;
+    background: linear-gradient(to left,
+      var(--bg) 0%,
+      rgba(250,250,248,.88) 7%,
+      rgba(250,250,248,.52) 18%,
+      rgba(250,250,248,.22) 32%,
+      rgba(250,250,248,.06) 52%,
+      transparent 72%); }
+
+  /* Ensure hero text floats above the walls */
+  #hero > .container { position: relative; z-index: 3; }
+
+  /* CTA glow */
+  .cta-glow-wrap { position: relative; display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .cta-glow-wrap::before {
+    content: '';
+    position: absolute;
+    width: 320px; height: 80px;
+    background: radial-gradient(ellipse at 38% 50%, rgba(77,141,255,0.28) 0%, rgba(165,107,255,0.16) 45%, transparent 72%);
+    filter: blur(24px);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 0; animation: aurora-drift 8s ease-in-out infinite;
+  }
+  .cta-glow-wrap > * { position: relative; z-index: 1; }
+
+  /* Hide walls below 1140px */
+  @media (max-width: 1140px) {
+    .vwall, .hero-fade-l, .hero-fade-r { display: none; }
+  }
+</style>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">swype<span style="color:var(--text-muted);">.me</span></a>
+
+    <div class="nav-links">
+      <a href="#workflow" class="nav-link">Workflow</a>
+      <a href="#creators" class="nav-link">Creators</a>
+      <a href="#platform" class="nav-link">Platform</a>
+      <a href="#for-brands" class="nav-link">For Brands</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="#" class="nav-creator-link" aria-label="Creator Login" title="Creator Login" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);transition:border-color 0.2s ease,background 0.2s ease;">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="5.5" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2.5 13.5C2.5 11.015 5.015 9 8 9s5.5 2.015 5.5 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="#final-cta" class="btn-primary nav-demo-btn">Book a Demo</a>
+      <button id="menu-toggle" aria-label="Menu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <div class="mobile-menu-header">
+    <span class="nav-logo">swype<span style="color:var(--text-muted);">.me</span></span>
+    <button id="menu-close" style="background:none;border:none;cursor:pointer;font-size:20px;color:var(--text-primary);line-height:1;">✕</button>
+  </div>
+  <a href="#workflow" class="mobile-nav-link">Workflow</a>
+  <a href="#creators" class="mobile-nav-link">Creators</a>
+  <a href="#platform" class="mobile-nav-link">Platform</a>
+  <a href="#for-brands" class="mobile-nav-link">For Brands</a>
+  <div class="mobile-cta-group">
+    <a href="#" class="btn-secondary" style="justify-content:center;">Creator Login</a>
+    <a href="#final-cta" class="btn-primary" style="justify-content:center;">Book a Demo</a>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section id="hero">
+  <div class="aurora-orb" style="width:760px;height:760px;top:-140px;left:-120px;background:radial-gradient(circle,rgba(77,141,255,0.14) 0%,transparent 68%);"></div>
+  <div class="aurora-orb" style="width:820px;height:820px;top:60px;right:-200px;background:radial-gradient(circle,rgba(165,107,255,0.12) 0%,transparent 68%);animation-delay:-9s;animation-duration:29s;"></div>
+  <div class="aurora-orb" style="width:620px;height:620px;bottom:-80px;left:32%;background:radial-gradient(circle,rgba(255,120,201,0.09) 0%,transparent 68%);animation-delay:-16s;animation-duration:21s;"></div>
+
+  <!-- LEFT creator video column -->
+  <div class="vwall vwall-l" aria-hidden="true">
+    <div class="vwall-track">
+      {[...leftCards, ...leftCards].map(c => (
+        <div class="cvcard">
+          <video class="cvcard-video" src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline></video>
+          <div class="cvcard-bg" style={`background:${c.bg};opacity:0.18;`}></div>
+          <div class="cvcard-top">
+            <span class="cvcard-label">{c.label}</span>
+            <span class="cvcard-likes">♥ {c.likes}</span>
+          </div>
+          <div class="cvcard-info">
+            <div class="cvcard-name">{c.handle}</div>
+            <div class="cvcard-sub">{c.sub}</div>
+          </div>
+          <div class="cvcard-bar"><div class="cvcard-bar-fill" style={`width:${c.progress}%;`}></div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- RIGHT creator video column -->
+  <div class="vwall vwall-r" aria-hidden="true">
+    <div class="vwall-track">
+      {[...rightCards, ...rightCards].map(c => (
+        <div class="cvcard">
+          <video class="cvcard-video" src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline></video>
+          <div class="cvcard-bg" style={`background:${c.bg};opacity:0.18;`}></div>
+          <div class="cvcard-top">
+            <span class="cvcard-label">{c.label}</span>
+            <span class="cvcard-likes">♥ {c.likes}</span>
+          </div>
+          <div class="cvcard-info">
+            <div class="cvcard-name">{c.handle}</div>
+            <div class="cvcard-sub">{c.sub}</div>
+          </div>
+          <div class="cvcard-bar"><div class="cvcard-bar-fill" style={`width:${c.progress}%;`}></div></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Edge fades -->
+  <div class="hero-fade-l" aria-hidden="true"></div>
+  <div class="hero-fade-r" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero-eyebrow reveal">
+      <span class="label-xs" style="margin-bottom:0;">The Operating System for UGC Campaigns</span>
+    </div>
+
+    <h1 class="hero-title reveal" style="max-width:900px;margin:0 auto 28px;animation-delay:0.06s;">
+      Run UGC<br/>like a product team.
+    </h1>
+
+    <p class="reveal" style="font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:var(--text-secondary);max-width:580px;margin:0 auto 44px;animation-delay:0.12s;">
+      Creator sourcing, scripting, approvals, production and publishing — in one structured workflow for modern marketing teams.
+    </p>
+
+    <div class="reveal" style="margin-bottom:16px;animation-delay:0.18s;">
+      <div class="cta-glow-wrap">
+        <a href="#final-cta" class="btn-primary" style="height:52px;padding:0 28px;font-size:15px;">Book a Demo</a>
+        <a href="#workflow" class="btn-secondary" style="height:52px;padding:0 28px;font-size:15px;">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5.5L9 7.5L6 9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Watch Workflow
+        </a>
+      </div>
+    </div>
+
+    <p class="reveal" style="font-size:12px;color:var(--text-muted);margin-bottom:0;animation-delay:0.22s;">
+      Built for brands, agencies and marketing teams running UGC at scale.
+    </p>
+
+  </div><!-- /.container -->
+</section><!-- /#hero -->
+
+
+<!-- ═══════════════════════════════ TESTIMONIALS ═══════════════════════════════ -->
+<section id="testimonials">
+  <div class="testi-strip reveal" aria-label="Customer testimonials">
+
+    <!-- Row 1: brands & agencies — scrolls left -->
+    <div class="testi-row" style="animation:ticker-scroll 44s linear infinite;">
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"We reduced campaign coordination time by 70%. swype.me replaced six tools and three Slack channels with one structured workflow."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#4D8DFF,#2563EB);">SK</div>
+          <div><div class="testi-name">Sarah K.</div><div class="testi-role">Head of Content &middot; HVNLY GmbH</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"Finally a platform that treats UGC production like a real process. Our team onboarded in a day and shipped 40 videos in three weeks."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#E65C00,#F9A825);">MB</div>
+          <div><div class="testi-name">Marcus B.</div><div class="testi-role">Marketing Director &middot; Orlen Group</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"swype.me saved our client relationships. No more lost email threads, no more missed deadlines &mdash; everything is transparent and on track."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#A56BFF,#FF78C9);">LM</div>
+          <div><div class="testi-name">Lara M.</div><div class="testi-role">Agency Lead &middot; Studio Flow</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"We scaled from 5 to 30 UGC videos per month without adding headcount. The approval workflows alone were worth switching."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#16A34A,#4ade80);">NH</div>
+          <div><div class="testi-name">Nina H.</div><div class="testi-role">Brand Lead &middot; Nakid Sports</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"We reduced campaign coordination time by 70%. swype.me replaced six tools and three Slack channels with one structured workflow."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#4D8DFF,#2563EB);">SK</div>
+          <div><div class="testi-name">Sarah K.</div><div class="testi-role">Head of Content &middot; HVNLY GmbH</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"Finally a platform that treats UGC production like a real process. Our team onboarded in a day and shipped 40 videos in three weeks."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#E65C00,#F9A825);">MB</div>
+          <div><div class="testi-name">Marcus B.</div><div class="testi-role">Marketing Director &middot; Orlen Group</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"swype.me saved our client relationships. No more lost email threads, no more missed deadlines &mdash; everything is transparent and on track."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#A56BFF,#FF78C9);">LM</div>
+          <div><div class="testi-name">Lara M.</div><div class="testi-role">Agency Lead &middot; Studio Flow</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"We scaled from 5 to 30 UGC videos per month without adding headcount. The approval workflows alone were worth switching."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#16A34A,#4ade80);">NH</div>
+          <div><div class="testi-name">Nina H.</div><div class="testi-role">Brand Lead &middot; Nakid Sports</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: creators — scrolls right -->
+    <div class="testi-row" style="margin-top:14px;animation:ticker-scroll 52s linear infinite reverse;">
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"Clear briefs, on-time payment, feedback that actually makes sense. This is how brand deals should work."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#feda77,#dd2a7b);">LH</div>
+          <div><div class="testi-name">@lenahoffmann</div><div class="testi-role">Beauty Creator &middot; 128K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"I doubled my monthly brand revenue in two months. The platform brings quality clients and handles all the admin."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#F97316,#FBBF24);">TJ</div>
+          <div><div class="testi-name">@tastewith_j</div><div class="testi-role">Food Creator &middot; 89K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"Before swype.me I managed everything over WhatsApp. Now I focus on creating &mdash; the platform handles contracts, briefs and revisions."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#4D8DFF,#06B6D4);">MM</div>
+          <div><div class="testi-name">@max.moves</div><div class="testi-role">Fitness Creator &middot; 56K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"The quality of campaigns on swype.me is different. Brands who use it are serious. I work exclusively with swype.me brands now."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#EC4899,#F9A8D4);">PS</div>
+          <div><div class="testi-name">@pure.skin</div><div class="testi-role">Skincare Creator &middot; 165K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"Clear briefs, on-time payment, feedback that actually makes sense. This is how brand deals should work."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#feda77,#dd2a7b);">LH</div>
+          <div><div class="testi-name">@lenahoffmann</div><div class="testi-role">Beauty Creator &middot; 128K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"I doubled my monthly brand revenue in two months. The platform brings quality clients and handles all the admin."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#F97316,#FBBF24);">TJ</div>
+          <div><div class="testi-name">@tastewith_j</div><div class="testi-role">Food Creator &middot; 89K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"Before swype.me I managed everything over WhatsApp. Now I focus on creating &mdash; the platform handles contracts, briefs and revisions."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#4D8DFF,#06B6D4);">MM</div>
+          <div><div class="testi-name">@max.moves</div><div class="testi-role">Fitness Creator &middot; 56K followers</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testi-quote">"The quality of campaigns on swype.me is different. Brands who use it are serious. I work exclusively with swype.me brands now."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#EC4899,#F9A8D4);">PS</div>
+          <div><div class="testi-name">@pure.skin</div><div class="testi-role">Skincare Creator &middot; 165K followers</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ PROBLEM ═══════════════════════════════ -->
+<section class="section" style="background:var(--surface-soft);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="two-col-responsive">
+
+      <!-- Left: Text -->
+      <div class="reveal">
+        <p class="label-xs section-label">The Problem</p>
+        <h2 class="section-title">UGC shouldn't require<br/>12 tools<br/>and 47 emails.</h2>
+        <p class="section-sub">
+          Most teams manage creator campaigns across spreadsheets, email threads, WhatsApp, shared drives and manual approvals — with no single source of truth.
+        </p>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:20px;line-height:1.6;">
+          swype.me replaces scattered coordination with one structured workflow.
+        </p>
+      </div>
+
+      <!-- Right: Chaos → Unity Visual -->
+      <div class="reveal" style="animation-delay:0.12s;">
+        <div style="display:flex;flex-direction:column;gap:20px;">
+
+          <!-- Chaos pile -->
+          <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;">
+            <p class="label-xs" style="margin-bottom:16px;">Before swype.me</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="8" fill="#25D366"/><path d="M8 3C5.24 3 3 5.24 3 8c0 .9.23 1.75.64 2.48L3 13l2.6-.63A5 5 0 1 0 8 3zm2.6 6.8c-.13.3-.8.57-1.1.6-.3.05-.62.04-.93-.05a8.8 8.8 0 0 1-1.2-.52C6.18 9.2 5.43 8.1 5.2 7.8c-.22-.3-.5-.9-.1-1.38.1-.14.3-.43.6-.43h.37c.1 0 .22.04.31.26l.46 1.1c.1.2.02.38-.07.5l-.23.29c.14.26.46.67.8 1 .35.32.8.57 1.06.67l.22-.26c.17-.16.35-.23.52-.14l1.1.53c.18.09.3.18.3.33-.01.12-.1.46-.54.73z" fill="white"/></svg>
+                WhatsApp
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="#EA4335"/><path d="M2.5 4.5h11v7a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-7z" fill="white"/><path d="M2.5 4.5L8 8.5l5.5-4" stroke="#EA4335" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                Email
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="#F8F9FA"/><path d="M8 2.5L13.5 12H2.5L8 2.5z" fill="none"/><path d="M2.5 12L5.5 7 8 12H2.5z" fill="#34A853"/><path d="M8 12l2.5-5L13.5 12H8z" fill="#FBBC04"/><path d="M5.5 7L8 2.5 10.5 7H5.5z" fill="#4285F4"/></svg>
+                Drive
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="#217346"/><rect x="3" y="3" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.3)"/><rect x="9" y="3" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.3)"/><rect x="3" y="9" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.3)"/><rect x="9" y="9" width="4" height="4" rx="0.5" fill="rgba(255,255,255,0.6)"/><path d="M4.5 5.5L6 7.5 7.5 5.5" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Excel
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="#4A154B"/><rect x="3" y="5.5" width="4.5" height="1.5" rx="0.75" fill="#E01E5A"/><rect x="7" y="3" width="1.5" height="4.5" rx="0.75" fill="#E01E5A"/><rect x="8.5" y="5.5" width="4.5" height="1.5" rx="0.75" fill="#36C5F0"/><rect x="8.5" y="3" width="1.5" height="4.5" rx="0.75" fill="#36C5F0"/><rect x="3" y="9" width="4.5" height="1.5" rx="0.75" fill="#2EB67D"/><rect x="7" y="9" width="1.5" height="4.5" rx="0.75" fill="#2EB67D"/><rect x="8.5" y="9" width="4.5" height="1.5" rx="0.75" fill="#ECB22E"/><rect x="8.5" y="9" width="1.5" height="4.5" rx="0.75" fill="#ECB22E"/></svg>
+                Slack
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="#191919"/><path d="M4 3.5V12.5M4 3.5L12 12.5M12 12.5V3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Notion
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="#0061FF"/><path d="M2.5 5L5.5 11.5L8 6.5L10.5 11.5L13.5 5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                WeTransfer
+              </div>
+              <div class="chaos-tool">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="3" fill="white" stroke="#E0E0E0" stroke-width="0.5"/><rect x="2" y="2" width="12" height="5" rx="1.5" fill="#4285F4"/><rect x="2" y="6.5" width="12" height="0.8" fill="#4285F4"/><circle cx="4.5" cy="1.5" r="1" fill="#4285F4"/><circle cx="11.5" cy="1.5" r="1" fill="#4285F4"/><circle cx="4.5" cy="10.5" r="1.2" fill="#EA4335"/><circle cx="8" cy="10.5" r="1.2" fill="#4285F4"/><circle cx="11.5" cy="10.5" r="1.2" fill="#34A853"/><circle cx="4.5" cy="13.5" r="1.2" fill="#FBBC04"/></svg>
+                Calendar
+              </div>
+            </div>
+            <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+              <p style="font-size:12px;color:var(--text-muted);">Avg. 14 back-and-forth messages per video · No version control · No single status view</p>
+            </div>
+          </div>
+
+          <!-- Arrow -->
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;">
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+            <div style="font-size:18px;color:var(--text-muted);">↓</div>
+            <div style="flex:1;height:1px;background:var(--border);"></div>
+          </div>
+
+          <!-- Unified -->
+          <div style="background:var(--text-primary);border-radius:20px;padding:24px;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;">After swype.me</p>
+              <p style="font-size:20px;font-weight:800;letter-spacing:-0.04em;color:white;line-height:1;">One system.<br/>Every step.</p>
+            </div>
+            <div class="chip chip-live" style="background:rgba(34,197,94,0.15);color:#4ADE80;border-color:rgba(34,197,94,0.25);">
+              <span class="chip-dot"></span>Live
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ WORKFLOW ENGINE ═══════════════════════════════ -->
+<section id="workflow" class="section">
+  <div class="container">
+    <div style="max-width:640px;margin-bottom:72px;" class="reveal">
+      <p class="label-xs section-label">Workflow Engine</p>
+      <h2 class="section-title">One workflow.<br/>Every step covered.</h2>
+      <p class="section-sub">
+        From campaign setup to creator delivery — every stakeholder gets the right view, the right task and the right next step.
+      </p>
+    </div>
+
+    <div class="reveal" style="animation-delay:0.1s;">
+
+      <div class="workflow-step">
+        <span class="step-num">01</span>
+        <div class="step-body">
+          <span class="step-title">Campaign Briefing</span>
+          <span class="step-desc">Define goals, formats, deliverables and creator profiles. Every participant starts with the same source of truth.</span>
+        </div>
+        <div class="chip chip-done"><span class="chip-dot"></span>Foundation</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">02</span>
+        <div class="step-body">
+          <span class="step-title">Creator Matching</span>
+          <span class="step-desc">Match by language, audience, style, availability and platform performance. No more cold outreach guesswork.</span>
+        </div>
+        <div class="chip chip-done"><span class="chip-dot"></span>Automated</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">03</span>
+        <div class="step-body">
+          <span class="step-title">Script & Creative</span>
+          <span class="step-desc">Generate hooks, scripts and shot lists from the brief. Review, edit and version — all in one place.</span>
+        </div>
+        <div class="chip chip-review"><span class="chip-dot"></span>AI-Assisted</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">04</span>
+        <div class="step-body">
+          <span class="step-title">Approval Rounds</span>
+          <span class="step-desc">Internal and client approvals with threaded comments, revision tracking and deadline visibility.</span>
+        </div>
+        <div class="chip chip-sched"><span class="chip-dot"></span>Structured</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">05</span>
+        <div class="step-body">
+          <span class="step-title">Content Production</span>
+          <span class="step-desc">Creators upload directly into the campaign. Progress is visible to everyone in real time.</span>
+        </div>
+        <div class="chip chip-review"><span class="chip-dot"></span>Tracked</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">06</span>
+        <div class="step-body">
+          <span class="step-title">Revision Management</span>
+          <span class="step-desc">Round-based revision requests with clear status for each video. No more versioned Drive folders.</span>
+        </div>
+        <div class="chip chip-draft"><span class="chip-dot"></span>Controlled</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">07</span>
+        <div class="step-body">
+          <span class="step-title">Publishing & Distribution</span>
+          <span class="step-desc">Prepare captions, platform scheduling and assets directly from the approved content.</span>
+        </div>
+        <div class="chip chip-sched"><span class="chip-dot"></span>Multi-Platform</div>
+      </div>
+
+      <div class="workflow-step">
+        <span class="step-num">08</span>
+        <div class="step-body">
+          <span class="step-title">Reporting & Archive</span>
+          <span class="step-desc">Every campaign is documented — deliverables, timelines, creator performance and client communications.</span>
+        </div>
+        <div class="chip chip-live"><span class="chip-dot"></span>Automated</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CREATOR MATCHING ═══════════════════════════════ -->
+<section id="creators" class="section" style="background:var(--surface-soft);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="two-col-responsive">
+
+      <!-- Left: Text + Stats -->
+      <div class="reveal">
+        <p class="label-xs section-label">Creator Intelligence</p>
+        <h2 class="section-title">Find the right creators.<br/>Not just available ones.</h2>
+        <p class="section-sub">
+          swype.me is a dedicated UGC search engine — match creators by language, style, audience, platform performance and availability. Not just by price.
+        </p>
+
+        <!-- Live Stats -->
+        <div class="stats-bar" style="margin-top:44px;">
+          <div class="stat-item">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span class="stat-value">2,847</span>
+              <span class="live-indicator"><span class="live-dot"></span>Live</span>
+            </div>
+            <span class="stat-label">Active creators on platform</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">€4.2M</span>
+            <span class="stat-label">Paid out to creators</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">94%</span>
+            <span class="stat-label">Avg. match accuracy</span>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:500;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;">German</span>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:500;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;">TikTok Native</span>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:500;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;">Studio Lighting</span>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:500;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;">Beauty</span>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:500;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;">Voiceover</span>
+          <span style="font-size:12px;color:var(--text-muted);font-weight:500;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:999px;">+24 filters</span>
+        </div>
+      </div>
+
+      <!-- Right: Creator Profile Card -->
+      <div class="reveal" style="animation-delay:0.14s;">
+        <div class="ugc-card">
+
+          <!-- Video with gradient overlay + avatar footer -->
+          <div class="ugc-vwrap">
+            <video src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline></video>
+            <div class="ugc-voverlay"></div>
+
+            <!-- Available badge top-right -->
+            <div style="position:absolute;top:12px;right:12px;">
+              <div class="chip chip-live" style="font-size:10px;backdrop-filter:blur(6px);background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.3);color:white;"><span class="chip-dot" style="background:#4ade80;"></span>Available</div>
+            </div>
+
+            <!-- Platform badges top-left -->
+            <div style="position:absolute;top:12px;left:12px;display:flex;gap:5px;">
+              <!-- TikTok -->
+              <div class="ugc-pbadge" style="background:#000;">
+                <svg width="11" height="13" viewBox="0 0 11 13" fill="none">
+                  <path d="M8.2 0C8.5 1.9 9.6 2.9 11 3.1v2.1c-1-.1-1.9-.5-2.6-1v4.6C8.4 11.1 6.6 13 4.2 13 1.9 13 0 11.1 0 8.8s1.9-4.2 4.2-4.2c.2 0 .5 0 .7.1v2.2c-.2-.1-.5-.1-.7-.1-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2V0h2z" fill="white"/>
+                </svg>
+              </div>
+              <!-- Instagram -->
+              <div class="ugc-pbadge" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <rect x="1" y="1" width="10" height="10" rx="3" fill="none" stroke="white" stroke-width="1.1"/>
+                  <circle cx="6" cy="6" r="2.3" fill="none" stroke="white" stroke-width="1.1"/>
+                  <circle cx="8.8" cy="3.2" r="0.7" fill="white"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Avatar + name overlay at bottom -->
+            <div class="ugc-vfooter">
+              <div class="ugc-avatar">LH</div>
+              <div>
+                <div class="ugc-name">Lena Hoffmann</div>
+                <div class="ugc-sub">@lenahoffmann &middot; Berlin</div>
+                <div class="ugc-platform-badges" style="margin-top:5px;">
+                  <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.12);border-radius:4px;padding:2px 6px;">Beauty</span>
+                  <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.12);border-radius:4px;padding:2px 6px;">Fashion</span>
+                  <span style="font-size:9px;font-weight:600;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.12);border-radius:4px;padding:2px 6px;">German</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key UGC metrics -->
+          <div class="ugc-stats">
+            <div class="ugc-stat">
+              <span class="ugc-stat-v">128K</span>
+              <span class="ugc-stat-l">Followers</span>
+            </div>
+            <div class="ugc-stat">
+              <span class="ugc-stat-v">8.4%</span>
+              <span class="ugc-stat-l">Engagement</span>
+            </div>
+            <div class="ugc-stat">
+              <span class="ugc-stat-v">42K</span>
+              <span class="ugc-stat-l">Avg. Views</span>
+            </div>
+            <div class="ugc-stat">
+              <span class="ugc-stat-v">12</span>
+              <span class="ugc-stat-l">Campaigns</span>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="ugc-tags">
+            <span class="ugc-tag">TikTok Native</span>
+            <span class="ugc-tag">Studio Lighting</span>
+            <span class="ugc-tag">Voiceover</span>
+            <span class="ugc-tag">Product Demo</span>
+          </div>
+
+          <!-- Campaign match + CTA -->
+          <div class="insta-match-section">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="background:rgba(77,141,255,0.08);border:1px solid rgba(77,141,255,0.15);border-radius:10px;padding:8px 14px;flex-shrink:0;">
+                <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);">Campaign Match</div>
+                <div style="font-size:26px;font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);line-height:1.1;">94<span style="font-size:14px;font-weight:600;color:var(--text-muted);">%</span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="font-size:11px;color:var(--text-secondary);">Style fit: <strong style="color:var(--text-primary);">Excellent</strong></div>
+                <div style="font-size:11px;color:var(--text-secondary);">Audience: <strong style="color:var(--text-primary);">Female 18–34</strong></div>
+                <div style="font-size:11px;color:var(--text-secondary);">Prev. campaigns: <strong style="color:var(--text-primary);">12</strong></div>
+              </div>
+            </div>
+            <button class="btn-primary" style="width:100%;justify-content:center;font-size:13px;height:38px;">Add to Campaign</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ AI SCRIPT ═══════════════════════════════ -->
+<section id="platform" class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="two-col-responsive">
+
+      <!-- Left: Script Panel -->
+      <div class="script-panel reveal">
+        <div class="script-panel-header">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="3" stroke="var(--text-muted)" stroke-width="1.2"/><path d="M4 5h6M4 7.5h4M4 10h5" stroke="var(--text-muted)" stroke-width="1.1" stroke-linecap="round"/></svg>
+          <span style="font-size:12px;font-weight:600;color:var(--text-secondary);">Script Generator</span>
+          <div class="chip chip-review" style="margin-left:auto;font-size:10px;"><span class="chip-dot"></span>Generating</div>
+        </div>
+        <div class="script-panel-body">
+          <div style="margin-bottom:14px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:6px;">Brief Summary</div>
+            <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;background:var(--surface-soft);padding:10px;border-radius:10px;">
+              Summer collection launch · Target: Women 22–35 · Tone: energetic, authentic · Platform: TikTok, Reels
+            </div>
+          </div>
+
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-muted);margin-bottom:8px;">Hook Options</div>
+
+          <div class="script-option selected">
+            <div class="script-option-label">Hook A — Selected</div>
+            <div class="script-option-text">"Get ready for your best summer yet — because this collection just changed everything."</div>
+          </div>
+
+          <div class="script-option">
+            <div class="script-option-label">Hook B</div>
+            <div class="script-option-text">"I found the pieces I've been looking for all year — and they're finally here."</div>
+          </div>
+
+          <div class="script-option">
+            <div class="script-option-label">Hook C</div>
+            <div class="script-option-text">"This is the capsule drop you didn't know your wardrobe was missing."</div>
+          </div>
+
+          <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:8px;">
+            <button class="btn-primary" style="flex:1;justify-content:center;font-size:12px;height:36px;">Send to Approval</button>
+            <button class="btn-secondary" style="font-size:12px;height:36px;padding:0 14px;">Regenerate</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text -->
+      <div class="reveal" style="animation-delay:0.14s;">
+        <p class="label-xs section-label">AI Script Intelligence</p>
+        <h2 class="section-title">Creative intelligence.<br/>Built into<br/>the workflow.</h2>
+        <p class="section-sub">
+          Generate hooks, scripts, shot lists, captions and CTA variations directly from the campaign brief — then review, edit and approve in one place.
+        </p>
+        <p style="font-size:14px;color:var(--text-muted);margin-top:20px;line-height:1.6;">
+          AI is a production accelerator, not the product. Every script goes through human review before it reaches a creator.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:32px;">
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);">
+            <span style="color:#16A34A;">✓</span> Hook and script generation from brief
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);">
+            <span style="color:#16A34A;">✓</span> Shot list and CTA variant creation
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);">
+            <span style="color:#16A34A;">✓</span> Versioned approval history
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-secondary);">
+            <span style="color:#16A34A;">✓</span> One-click send to creator or client
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ APPROVAL ═══════════════════════════════ -->
+<section class="section" style="background:var(--surface-soft);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="two-col-responsive">
+
+      <!-- Left: Text -->
+      <div class="reveal">
+        <p class="label-xs section-label">Approval & Production</p>
+        <h2 class="section-title">Approvals<br/>without<br/>bottlenecks.</h2>
+        <p class="section-sub">
+          Clients, project managers and creators always know what is waiting, what is approved and what needs revision.
+        </p>
+        <div style="margin-top:36px;display:flex;flex-direction:column;gap:16px;">
+          <div style="padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Revision counter</div>
+            <div style="font-size:18px;font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">R2 <span style="font-size:13px;font-weight:500;color:var(--text-muted);">of max 3</span></div>
+          </div>
+          <div style="padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Pending approval</div>
+            <div style="font-size:18px;font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">3 <span style="font-size:13px;font-weight:500;color:var(--text-muted);">videos awaiting client</span></div>
+          </div>
+          <div style="padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Deadline</div>
+            <div style="font-size:18px;font-weight:800;letter-spacing:-0.03em;color:var(--text-primary);">Jul 11 <span style="font-size:13px;font-weight:500;color:var(--text-muted);">· 2 days left</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Approval Interface -->
+      <div class="reveal" style="animation-delay:0.14s;">
+        <div class="approval-panel">
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13px;font-weight:700;color:var(--text-primary);">Video 03 of 06</span>
+            <div class="chip chip-review"><span class="chip-dot"></span>Waiting for client</div>
+          </div>
+          <div style="padding:20px;display:flex;gap:16px;align-items:flex-start;">
+            <!-- Video preview -->
+            <div style="width:120px;flex-shrink:0;aspect-ratio:9/16;max-height:340px;border-radius:16px;overflow:hidden;border:1px solid var(--border);">
+              <video src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            </div>
+            <!-- Comment column -->
+            <div style="flex:1;display:flex;flex-direction:column;gap:0;">
+              <div class="approval-row">
+                <div class="approval-avatar">PM</div>
+                <div>
+                  <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:2px;">Project Manager</div>
+                  <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">"Hook is strong. Please adjust the CTA at 0:14."</div>
+                </div>
+              </div>
+              <div class="approval-row">
+                <div class="approval-avatar">C</div>
+                <div>
+                  <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:2px;">Creator</div>
+                  <div style="font-size:11px;color:var(--text-muted);line-height:1.5;">"Revised. V2 uploaded."</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="padding:16px 20px;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <button class="approval-btn approve">✓ Approve</button>
+            <button class="approval-btn revise">Request Revision</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ PUBLISHING ═══════════════════════════════ -->
+<section id="publishing" class="section">
+  <div class="container">
+    <div style="max-width:640px;margin:0 auto 72px;text-align:center;" class="reveal">
+      <p class="label-xs section-label">Publishing & Distribution</p>
+      <h2 class="section-title">From approved content<br/>to scheduled posts.</h2>
+      <p class="section-sub" style="margin:24px auto 0;">
+        Once content is approved, prepare publishing, captions and platform scheduling directly from the campaign workflow.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;" class="two-col-responsive reveal" style="animation-delay:0.1s;">
+
+      <!-- Calendar Mock -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:24px;box-shadow:var(--shadow-card);">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <span style="font-size:14px;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);">July 2025</span>
+          <div class="chip chip-sched"><span class="chip-dot"></span>4 posts scheduled</div>
+        </div>
+        <div class="calendar-week">
+          <div class="cal-day">Mo</div><div class="cal-day">Tu</div><div class="cal-day">We</div>
+          <div class="cal-day">Th</div><div class="cal-day">Fr</div><div class="cal-day">Sa</div><div class="cal-day">Su</div>
+          <div></div><div></div><div></div><div></div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">11</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">12</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">13</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">14</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">15</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">16</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">17</div>
+          <div colspan="7" style="grid-column:1/-1;padding-top:8px;">
+            <div class="cal-event" style="background:rgba(13,13,13,0.85);">
+              <video class="cal-event-thumb" src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline></video>
+              TikTok · 09:00
+            </div>
+            <div class="cal-event" style="background:rgba(165,107,255,0.8);">
+              <video class="cal-event-thumb" src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline></video>
+              Reels · 11:00
+            </div>
+          </div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">21</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">22</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">23</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">24</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">25</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">26</div>
+          <div style="font-size:10px;text-align:center;color:var(--text-muted);">27</div>
+          <div colspan="7" style="grid-column:1/-1;">
+            <div class="cal-event" style="background:rgba(255,0,0,0.8);">
+              <video class="cal-event-thumb" src={`${import.meta.env.BASE_URL}creator-video.mp4`} autoplay muted loop playsinline></video>
+              YT Shorts · 15:00
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platforms -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="publish-platform">
+          <div class="platform-icon" style="background:#010101;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M14 5.8a3.8 3.8 0 0 1-2.3-1.9h-1.8V12a1.9 1.9 0 1 1-1.3-1.8V8.4A3.9 3.9 0 1 0 12.2 12V8.4c.6.4 1.2.7 1.8.8V7.4A3.8 3.8 0 0 1 14 7.6V5.8z" fill="white"/>
+              <path d="M14 5.8a3.8 3.8 0 0 1-2.3-1.9h-1.8V12a1.9 1.9 0 1 1-1.3-1.8V8.4A3.9 3.9 0 1 0 12.2 12V8.4c.6.4 1.2.7 1.8.8V7.4A3.8 3.8 0 0 1 14 7.6V5.8z" fill="#69C9D0" style="clip-path:inset(0 0 0 55%);opacity:0.9;"/>
+            </svg>
+          </div>
+          <div>
+            <div class="platform-name">TikTok</div>
+            <div class="platform-schedule">Jul 14 · 09:00 · 2 posts</div>
+          </div>
+          <div style="margin-left:auto;" class="chip chip-sched"><span class="chip-dot"></span>Scheduled</div>
+        </div>
+        <div class="publish-platform">
+          <div class="platform-icon" style="background:rgba(165,107,255,0.1);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="3" y="3" width="12" height="12" rx="3.5" stroke="#A56BFF" stroke-width="1.4"/><circle cx="9" cy="9" r="2.5" stroke="#A56BFF" stroke-width="1.2"/><circle cx="12.5" cy="5.5" r="0.8" fill="#A56BFF"/></svg>
+          </div>
+          <div>
+            <div class="platform-name">Instagram Reels</div>
+            <div class="platform-schedule">Jul 14 · 11:00 · 2 posts</div>
+          </div>
+          <div style="margin-left:auto;" class="chip chip-sched"><span class="chip-dot"></span>Scheduled</div>
+        </div>
+        <div class="publish-platform">
+          <div class="platform-icon" style="background:#FF0000;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="1.5" y="4" width="15" height="10" rx="3" fill="white"/>
+              <path d="M7.5 7L11.5 9L7.5 11V7z" fill="#FF0000"/>
+            </svg>
+          </div>
+          <div>
+            <div class="platform-name">YouTube Shorts</div>
+            <div class="platform-schedule">Jul 24 · 15:00 · 2 posts</div>
+          </div>
+          <div style="margin-left:auto;" class="chip chip-sched"><span class="chip-dot"></span>Scheduled</div>
+        </div>
+        <div class="publish-platform" style="opacity:0.55;">
+          <div class="platform-icon" style="background:#0A66C2;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="2" y="6.5" width="3" height="9" rx="0.5" fill="white"/>
+              <circle cx="3.5" cy="4" r="1.5" fill="white"/>
+              <path d="M7.5 6.5H10V8c.6-1 1.8-1.5 3-1.5 2.2 0 3 1.4 3 3.5V15.5h-3v-5c0-1-.4-1.5-1.4-1.5-1 0-1.6.6-1.6 1.5v5H7.5V6.5z" fill="white"/>
+            </svg>
+          </div>
+          <div>
+            <div class="platform-name" style="color:var(--text-muted);">LinkedIn</div>
+            <div class="platform-schedule">Not scheduled</div>
+          </div>
+          <div style="margin-left:auto;" class="chip chip-draft"><span class="chip-dot"></span>Draft</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ ENTERPRISE METRICS ═══════════════════════════════ -->
+<section id="for-brands" class="section" style="background:var(--surface-soft);">
+  <div class="container">
+    <div style="max-width:540px;margin-bottom:72px;" class="reveal">
+      <p class="label-xs section-label">Enterprise Outcomes</p>
+      <h2 class="section-title">Built for teams that run UGC at scale.</h2>
+    </div>
+
+    <div class="reveal" style="animation-delay:0.1s;">
+      <div class="metric-row">
+        <div>
+          <div class="metric-number">90%</div>
+          <div class="metric-label">Less coordination overhead</div>
+          <div class="metric-note">Designed to eliminate back-and-forth across tools</div>
+        </div>
+        <div>
+          <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);max-width:380px;">
+            Replace scattered tools, manual approvals and endless coordination with one structured workflow — so your team can focus on campaign quality, not process management.
+          </p>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <div>
+          <div class="metric-number">3×</div>
+          <div class="metric-label">Faster campaign execution</div>
+          <div class="metric-note">Designed to accelerate time from brief to publish</div>
+        </div>
+        <div>
+          <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);max-width:380px;">
+            Parallel workflows across multiple creators, structured approval rounds and automated status tracking mean your campaigns move faster — without dropping quality.
+          </p>
+        </div>
+      </div>
+
+      <div class="metric-row">
+        <div>
+          <div class="metric-number">1</div>
+          <div class="metric-label">System instead of scattered tools</div>
+          <div class="metric-note">One platform, every stakeholder, every step</div>
+        </div>
+        <div>
+          <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);max-width:380px;">
+            Brands, agencies, project managers, creators and clients — all in one place, with role-based access and real-time campaign visibility.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ LOGO STRIP ═══════════════════════════════ -->
+<section class="section" style="padding-block:80px;">
+  <div class="container">
+    <p class="label-xs" style="text-align:center;margin-bottom:40px;" class="reveal">Built for modern marketing workflows</p>
+    <div class="logo-strip reveal" style="animation-delay:0.1s;">
+      <div class="logo-placeholder"></div>
+      <div class="logo-placeholder" style="width:64px;"></div>
+      <div class="logo-placeholder" style="width:96px;"></div>
+      <div class="logo-placeholder" style="width:72px;"></div>
+      <div class="logo-placeholder" style="width:88px;"></div>
+      <div class="logo-placeholder" style="width:60px;"></div>
+      <div class="logo-placeholder" style="width:100px;"></div>
+    </div>
+    <p style="text-align:center;font-size:11px;color:var(--text-muted);margin-top:28px;">Client logos available upon request</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CAMPAIGN SIMULATION ═══════════════════════════════ -->
+<section class="section" style="background:var(--surface-soft);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="two-col-responsive">
+
+      <!-- Left: Campaign Info -->
+      <div class="reveal">
+        <p class="label-xs section-label">Use Case</p>
+        <h2 class="section-title">See a campaign<br/>move from<br/>brief to live.</h2>
+        <p class="section-sub">
+          A real campaign flow — 14 days, 4 creators, 12 videos, 5 platforms.
+        </p>
+
+        <div style="margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);">12</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Videos</div>
+          </div>
+          <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);">4</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Creators</div>
+          </div>
+          <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);">3</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Approval rounds</div>
+          </div>
+          <div style="padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:14px;">
+            <div style="font-size:24px;font-weight:800;letter-spacing:-0.04em;color:var(--text-primary);">5</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Platforms</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Timeline -->
+      <div class="campaign-timeline reveal" style="animation-delay:0.14s;">
+
+        <div class="timeline-item" style="padding-bottom:28px;">
+          <div class="timeline-day">Day 1</div>
+          <div style="position:relative;padding-left:28px;padding-bottom:28px;">
+            <div style="position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:50%;background:rgba(34,197,94,0.1);border:2px solid #22C55E;z-index:1;"></div>
+            <div style="position:absolute;left:5px;top:14px;bottom:-28px;width:1px;background:var(--border);"></div>
+            <div class="timeline-event">Campaign brief created</div>
+            <div class="timeline-desc">Summer Collection UGC · 6 creators · 12 videos</div>
+          </div>
+        </div>
+
+        <div class="timeline-item" style="padding-bottom:28px;">
+          <div class="timeline-day">Day 2</div>
+          <div style="position:relative;padding-left:28px;padding-bottom:28px;">
+            <div style="position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:50%;background:rgba(34,197,94,0.1);border:2px solid #22C55E;z-index:1;"></div>
+            <div style="position:absolute;left:5px;top:14px;bottom:-28px;width:1px;background:var(--border);"></div>
+            <div class="timeline-event">4 creators matched</div>
+            <div class="timeline-desc">Match scores 88–96% · 2 invited</div>
+          </div>
+        </div>
+
+        <div class="timeline-item" style="padding-bottom:28px;">
+          <div class="timeline-day">Day 3</div>
+          <div style="position:relative;padding-left:28px;padding-bottom:28px;">
+            <div style="position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:50%;background:rgba(34,197,94,0.1);border:2px solid #22C55E;z-index:1;"></div>
+            <div style="position:absolute;left:5px;top:14px;bottom:-28px;width:1px;background:var(--border);"></div>
+            <div class="timeline-event">Scripts approved V2</div>
+            <div class="timeline-desc">Hook A selected · Shot list finalized</div>
+          </div>
+        </div>
+
+        <div class="timeline-item" style="padding-bottom:28px;">
+          <div class="timeline-day">Day 7</div>
+          <div style="position:relative;padding-left:28px;padding-bottom:28px;">
+            <div style="position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:50%;background:rgba(77,141,255,0.1);border:2px solid #4D8DFF;z-index:1;"></div>
+            <div style="position:absolute;left:5px;top:14px;bottom:-28px;width:1px;background:var(--border);"></div>
+            <div class="timeline-event">First uploads submitted</div>
+            <div class="timeline-desc">8 of 12 videos · Revision round 1</div>
+          </div>
+        </div>
+
+        <div class="timeline-item" style="padding-bottom:28px;">
+          <div class="timeline-day">Day 10</div>
+          <div style="position:relative;padding-left:28px;padding-bottom:28px;">
+            <div style="position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:50%;background:rgba(77,141,255,0.1);border:2px solid #4D8DFF;z-index:1;"></div>
+            <div style="position:absolute;left:5px;top:14px;bottom:-28px;width:1px;background:var(--border);"></div>
+            <div class="timeline-event">Client approvals completed</div>
+            <div class="timeline-desc">12 of 12 approved · Publishing prepared</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-day">Day 14</div>
+          <div style="position:relative;padding-left:28px;">
+            <div style="position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:50%;background:rgba(34,197,94,0.12);border:2px solid #22C55E;z-index:1;"></div>
+            <div class="timeline-event" style="display:flex;align-items:center;gap:10px;">
+              Scheduled posts go live
+              <span class="live-indicator"><span class="live-dot"></span>Live</span>
+            </div>
+            <div class="timeline-desc">TikTok · Reels · YT Shorts · LinkedIn · Facebook</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ SECURITY / ROLES ═══════════════════════════════ -->
+<section id="security" class="section">
+  <div class="container">
+    <div style="max-width:640px;margin-bottom:72px;" class="reveal">
+      <p class="label-xs section-label">Access Control</p>
+      <h2 class="section-title">Enterprise control<br/>for every<br/>stakeholder.</h2>
+      <p class="section-sub">
+        Give clients, creators and internal teams exactly the access they need — nothing more.
+      </p>
+    </div>
+
+    <div class="reveal" style="animation-delay:0.1s;">
+
+      <div class="role-row">
+        <div>
+          <div class="role-name">Admin</div>
+          <div class="role-access">Full Access</div>
+        </div>
+        <div class="permission-list">
+          <div class="permission-item"><span class="perm-icon">✓</span> Full campaign and workflow management</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Creator database access and invitations</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Script generation and approval control</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Publishing calendar and distribution</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Reporting, archive and analytics</div>
+        </div>
+      </div>
+
+      <div class="role-row">
+        <div>
+          <div class="role-name">Client</div>
+          <div class="role-access">Review & Approve</div>
+        </div>
+        <div class="permission-list">
+          <div class="permission-item"><span class="perm-icon">✓</span> Campaign overview and status tracking</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Script and content review with comments</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> One-click approval or revision request</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Asset download after approval</div>
+          <div class="permission-item" style="color:var(--text-muted);"><span style="color:var(--text-muted);">—</span> No creator data or pricing visibility</div>
+        </div>
+      </div>
+
+      <div class="role-row">
+        <div>
+          <div class="role-name">Creator</div>
+          <div class="role-access">Deliver & Revise</div>
+        </div>
+        <div class="permission-list">
+          <div class="permission-item"><span class="perm-icon">✓</span> Campaign briefing and script access</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Direct content upload and versioning</div>
+          <div class="permission-item"><span class="perm-icon">✓</span> Revision feedback and status tracking</div>
+          <div class="permission-item" style="color:var(--text-muted);"><span style="color:var(--text-muted);">—</span> No client access or campaign financials</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ FINAL CTA ═══════════════════════════════ -->
+<section id="final-cta">
+  <div class="cta-aurora" style="width:600px;height:600px;top:-100px;left:-80px;background:radial-gradient(circle,rgba(77,141,255,0.15) 0%,transparent 70%);"></div>
+  <div class="cta-aurora" style="width:700px;height:700px;top:60px;right:-160px;background:radial-gradient(circle,rgba(165,107,255,0.12) 0%,transparent 70%);animation-delay:-10s;animation-duration:31s;"></div>
+  <div class="cta-aurora" style="width:500px;height:500px;bottom:-80px;left:40%;background:radial-gradient(circle,rgba(255,120,201,0.1) 0%,transparent 70%);animation-delay:-18s;animation-duration:22s;"></div>
+
+  <div class="container" style="position:relative;z-index:1;">
+    <p style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:24px;" class="reveal">Get started</p>
+    <h2 class="cta-title reveal" style="animation-delay:0.06s;">
+      Stop managing UGC.<br/>Start operating it.
+    </h2>
+    <p class="cta-sub reveal" style="animation-delay:0.12s;">
+      Turn creator campaigns into a repeatable, scalable workflow your team can trust.
+    </p>
+    <div class="reveal" style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;animation-delay:0.18s;">
+      <a href="#" class="btn-cta-white">Book a Demo</a>
+      <a href="#creators" class="btn-cta-ghost">Explore Creator Portal</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;align-items:start;margin-bottom:48px;" class="two-col-responsive">
+      <div>
+        <div class="footer-logo">swype<span style="color:var(--text-muted);">.me</span></div>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.6;">The Operating System<br/>for UGC Campaigns.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+        <div>
+          <p class="label-xs" style="margin-bottom:14px;">Product</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#workflow" class="footer-link">Workflow</a>
+            <a href="#creators" class="footer-link">Creator Matching</a>
+            <a href="#platform" class="footer-link">AI Script</a>
+            <a href="#publishing" class="footer-link">Publishing</a>
+          </div>
+        </div>
+        <div>
+          <p class="label-xs" style="margin-bottom:14px;">Company</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" class="footer-link">For Brands</a>
+            <a href="#" class="footer-link">For Creators</a>
+            <a href="#" class="footer-link">Pricing</a>
+            <a href="#" class="footer-link">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="label-xs" style="margin-bottom:14px;">Legal</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <a href="#" class="footer-link">Imprint</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <p style="font-size:12px;color:var(--text-muted);">© 2025 swype.me by swype</p>
+      <a href="#" class="btn-primary" style="height:36px;padding:0 16px;font-size:12px;">Book a Demo</a>
+    </div>
+  </div>
+</footer>
+
+
+<style>
+  /* Responsive: stack 2-col layouts on mobile */
+  @media (max-width: 768px) {
+    .two-col-responsive { grid-template-columns: 1fr !important; gap: 48px !important; }
+    .stats-bar { gap: 24px; }
+    .stat-item { padding-right: 24px; margin-right: 24px; }
+  }
+</style>
+
+
+<script>
+  // ── Nav scroll effect ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // ── Mobile menu ──
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle?.addEventListener('click', () => mobileMenu?.classList.add('open'));
+  menuClose?.addEventListener('click', () => mobileMenu?.classList.remove('open'));
+  mobileMenu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // ── Reveal on scroll ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── Stagger pipeline connector dots with different delays ──
+  document.querySelectorAll('.connector-dot').forEach((dot, i) => {
+    dot.style.animationDelay = `${i * 0.46}s`;
+  });
+</script>
+
+</Layout>

@@ -1,0 +1,181 @@
+export const translations = {
+  de: {
+    nav: {
+      features: "Features",
+      workflow: "Workflow",
+      forClients: "Für Kunden",
+      forCreators: "Für Creator",
+      demo: "Demo anfragen",
+      lang: "EN",
+    },
+    hero: {
+      badge: "Spotlight by swype",
+      headline: "UGC-Kampagnen.\nVollautomatisiert.",
+      subline: "Von Briefing bis Social-Media-Post — alles in einer Plattform. Kein Chaos mehr in E-Mails, WhatsApp und Google Drive.",
+      ctaClient: "Demo anfragen",
+      ctaCreator: "Als Creator bewerben",
+      scroll: "Mehr entdecken",
+    },
+    problem: {
+      label: "Das Problem",
+      headline: "Der tägliche Koordinationswahnsinn kostet dich Zeit und Geld.",
+      items: [
+        { icon: "📧", text: "Endlose E-Mail-Chains mit Kunden und Creatorn" },
+        { icon: "💬", text: "Feedback per WhatsApp, das niemand mehr findet" },
+        { icon: "📁", text: "Dateien verteilt über Drive, Dropbox und WeTransfer" },
+        { icon: "📋", text: "Manuelle Vertragsabwicklung und Rechnungsstellung" },
+      ],
+      solution: "Spotlight löst das alles — zentral, automatisiert, professionell.",
+    },
+    workflow: {
+      label: "Der Prozess",
+      headline: "End-to-End. Ohne manuelle Schritte.",
+      steps: [
+        { number: "01", title: "Kampagne erstellen", desc: "Kunde definiert Videoart, Anzahl, Plattform und Guidelines — direkt im Dashboard." },
+        { number: "02", title: "Creator Matching", desc: "Algorithmus matcht passende Creator nach Stil, Sprache, Equipment und Verfügbarkeit." },
+        { number: "03", title: "KI-Skripterstellung", desc: "ChatGPT generiert Skript-Vorschläge basierend auf dem Briefing — editierbar und versionierbar." },
+        { number: "04", title: "Content-Produktion", desc: "Creator erhält automatisch Auftrag mit Skript, Guidelines und Deadline." },
+        { number: "05", title: "Freigabe-Workflow", desc: "Agentur prüft intern, Kunde gibt frei — mit Kommentarfunktion und Revisionstracking." },
+        { number: "06", title: "Social Publishing", desc: "Freigegebener Content wird direkt auf TikTok, Instagram, YouTube & Co. geplant und gepostet." },
+      ],
+    },
+    features: {
+      label: "Features",
+      headline: "Alles was du brauchst.",
+      items: [
+        { icon: "🎯", title: "Creator Matching", desc: "Automatisches oder manuelles Matching nach 10+ Kriterien: Stil, Sprache, Performance, Preis." },
+        { icon: "✍️", title: "KI-Skripterstellung", desc: "ChatGPT-Integration generiert Skripte, Hooks, CTAs und Shotlists in Sekunden." },
+        { icon: "📝", title: "Automatisierte Verträge", desc: "Template-basierte Verträge mit E-Signatur (DocuSign). Vollständige Rechteabtretung inklusive." },
+        { icon: "✅", title: "Freigabe-Workflows", desc: "Klare Statusübergänge, Kommentarfunktion und Revisionszählung — für Skripte und Videos." },
+        { icon: "📱", title: "Social Media Publishing", desc: "Mixpost-Integration: Planung und Veröffentlichung auf TikTok, Instagram, YouTube, LinkedIn." },
+        { icon: "💳", title: "Automatische Abrechnung", desc: "FastBill-Integration erstellt Angebote und Rechnungen direkt aus den Kampagnendaten." },
+      ],
+    },
+    forClients: {
+      label: "Für Unternehmenskunden",
+      headline: "Dein UGC-Content.\nDeine Kontrolle.",
+      points: [
+        "Kampagnen-Dashboard mit Live-Status",
+        "Skripte und Videos per Klick freigeben",
+        "Revisionen mit strukturiertem Feedback",
+        "Direkter Download und Social Publishing",
+        "Angebote und Laufzeiten immer im Blick",
+      ],
+      cta: "Demo anfragen",
+    },
+    forCreators: {
+      label: "Für UGC Creator",
+      headline: "Professionell arbeiten.\nOhne Bürokratie.",
+      points: [
+        "Klare Briefs mit Skript und Guidelines",
+        "Deadlines und Aufträge zentral verwalten",
+        "Videos direkt in der Plattform uploaden",
+        "Revisionsfeedback strukturiert erhalten",
+        "Vertragsstatus jederzeit einsehbar",
+      ],
+      cta: "Als Creator bewerben",
+    },
+    cta: {
+      headline: "Bereit, UGC-Chaos zu beenden?",
+      subline: "Werde Teil der ersten Kunden und erlebe Spotlight by swype.",
+      ctaClient: "Demo anfragen",
+      ctaCreator: "Als Creator bewerben",
+    },
+    footer: {
+      tagline: "Automatisierte UGC-Content-Abwicklung.",
+      links: ["Datenschutz", "Impressum", "Kontakt"],
+      copy: "© 2025 swype. Alle Rechte vorbehalten.",
+    },
+  },
+  en: {
+    nav: {
+      features: "Features",
+      workflow: "Workflow",
+      forClients: "For Clients",
+      forCreators: "For Creators",
+      demo: "Request Demo",
+      lang: "DE",
+    },
+    hero: {
+      badge: "Spotlight by swype",
+      headline: "UGC Campaigns.\nFully Automated.",
+      subline: "From briefing to social media post — everything in one platform. No more chaos across emails, WhatsApp and Google Drive.",
+      ctaClient: "Request Demo",
+      ctaCreator: "Apply as Creator",
+      scroll: "Discover more",
+    },
+    problem: {
+      label: "The Problem",
+      headline: "The daily coordination madness costs you time and money.",
+      items: [
+        { icon: "📧", text: "Endless email chains with clients and creators" },
+        { icon: "💬", text: "Feedback via WhatsApp that nobody can find later" },
+        { icon: "📁", text: "Files scattered across Drive, Dropbox and WeTransfer" },
+        { icon: "📋", text: "Manual contract handling and invoice creation" },
+      ],
+      solution: "Spotlight solves all of this — centralized, automated, professional.",
+    },
+    workflow: {
+      label: "The Process",
+      headline: "End-to-End. Without manual steps.",
+      steps: [
+        { number: "01", title: "Create Campaign", desc: "Client defines video type, quantity, platform and guidelines — directly in the dashboard." },
+        { number: "02", title: "Creator Matching", desc: "Algorithm matches fitting creators by style, language, equipment and availability." },
+        { number: "03", title: "AI Script Creation", desc: "ChatGPT generates script suggestions based on the briefing — editable and versioned." },
+        { number: "04", title: "Content Production", desc: "Creator automatically receives the assignment with script, guidelines and deadline." },
+        { number: "05", title: "Approval Workflow", desc: "Agency reviews internally, client approves — with comments and revision tracking." },
+        { number: "06", title: "Social Publishing", desc: "Approved content is scheduled and posted directly to TikTok, Instagram, YouTube & more." },
+      ],
+    },
+    features: {
+      label: "Features",
+      headline: "Everything you need.",
+      items: [
+        { icon: "🎯", title: "Creator Matching", desc: "Automatic or manual matching based on 10+ criteria: style, language, performance, price." },
+        { icon: "✍️", title: "AI Script Creation", desc: "ChatGPT integration generates scripts, hooks, CTAs and shot lists in seconds." },
+        { icon: "📝", title: "Automated Contracts", desc: "Template-based contracts with e-signature (DocuSign). Full rights transfer included." },
+        { icon: "✅", title: "Approval Workflows", desc: "Clear status transitions, comment functionality and revision counting — for scripts and videos." },
+        { icon: "📱", title: "Social Media Publishing", desc: "Mixpost integration: schedule and publish to TikTok, Instagram, YouTube, LinkedIn." },
+        { icon: "💳", title: "Automated Billing", desc: "FastBill integration creates quotes and invoices directly from campaign data." },
+      ],
+    },
+    forClients: {
+      label: "For Business Clients",
+      headline: "Your UGC Content.\nYour Control.",
+      points: [
+        "Campaign dashboard with live status",
+        "Approve scripts and videos with one click",
+        "Revisions with structured feedback",
+        "Direct download and social publishing",
+        "Quotes and subscription terms always in view",
+      ],
+      cta: "Request Demo",
+    },
+    forCreators: {
+      label: "For UGC Creators",
+      headline: "Work Professionally.\nWithout Bureaucracy.",
+      points: [
+        "Clear briefs with script and guidelines",
+        "Deadlines and assignments in one place",
+        "Upload videos directly in the platform",
+        "Receive revision feedback in a structured way",
+        "Contract status visible at any time",
+      ],
+      cta: "Apply as Creator",
+    },
+    cta: {
+      headline: "Ready to end UGC chaos?",
+      subline: "Join the first clients and experience Spotlight by swype.",
+      ctaClient: "Request Demo",
+      ctaCreator: "Apply as Creator",
+    },
+    footer: {
+      tagline: "Automated UGC content management.",
+      links: ["Privacy", "Imprint", "Contact"],
+      copy: "© 2025 swype. All rights reserved.",
+    },
+  },
+} as const;
+
+export type Lang = keyof typeof translations;
+export type Translations = typeof translations[Lang];
